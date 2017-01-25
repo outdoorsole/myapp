@@ -1,0 +1,19 @@
+{
+  "name": "myapp",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Maribel Montejano"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/outdoorsole/myapp",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ]
+}
