@@ -19,6 +19,11 @@ app.get('/api/blahs', function(req, res) {
     ]);
 });
 
+app.get('/greetings/:name', function(req, res) {
+  // res.json('greetings ', req.params.name);
+  res.json("Greetings, " + req.params.name + "!");
+});
+
 // SERVER
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
