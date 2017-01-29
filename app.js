@@ -9,7 +9,7 @@ app.use(express.static('public'));
 
 // ROUTES
 app.get('/', function(req, res) {
-  res.render('home');
+  res.send('<h1>I\'m Alive</h1>');
 });
 
 app.get('/api/blahs', function(req, res) {
