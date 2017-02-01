@@ -47,6 +47,7 @@ app.get('/posts', function(req, res) {
   Post.find(function (err, posts) {
     if (err) return console.error(err);
     console.log(posts);
+    res.render('posts-index', posts);
   });
 });
 
