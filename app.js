@@ -6,6 +6,8 @@ var mongoose = require('mongoose');
 
 var db = mongoose.connection;
 
+// MODELS
+var Post = require('./app/models/post.js');
 
 // MIDDLEWARE
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -19,7 +21,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('we\'re connected!');
 });
-
 
 // ROUTES
 app.get('/', function(req, res) {
