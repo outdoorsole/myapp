@@ -7,6 +7,9 @@ var mongoose = require('mongoose');
 // MODELS
 var Post = require('./app/models/post.js');
 
+// CONTROLLERS
+var AuthController = require('./app/auth/auth');
+
 // MIDDLEWARE
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
