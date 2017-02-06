@@ -1,11 +1,27 @@
+// NODE MODULES
 var express = require('express');
 var exphbs = require('express-handlebars');
 var app = express();
+var mongoose = require('mongoose');
+
+// MODELS
+var Post = require('./app/models/post.js');
 
 // MIDDLEWARE
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(express.static('public'));
+
+/* open a connection to the database */
+mongoose.connect('mongodb://localhost/myapp');
+
+var db = mongoose.connection;
+
+/* check the connection */
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('we\'re connected!');
+});
 
 // ROUTES
 app.get('/', function(req, res) {
@@ -21,6 +37,19 @@ app.get('/api/blahs', function(req, res) {
 
 app.get('/greetings/:name', function(req, res) {
   res.json("Greetings, " + req.params.name + "!");
+});
+
+var newPost = new Post ( { body: "This is a new post" });
+newPost.save(function (err, newPost) {
+  if (err) return console.error(err);
+});
+
+app.get('/posts', function(req, res) {
+  Post.find(function (err, posts) {
+    if (err) return console.error(err);
+    console.log(posts);
+    res.render('posts-index', { posts: posts });
+  });
 });
 
 // SERVER
