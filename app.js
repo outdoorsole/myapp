@@ -4,8 +4,6 @@ var exphbs = require('express-handlebars');
 var app = express();
 var mongoose = require('mongoose');
 
-var db = mongoose.connection;
-
 // MODELS
 var Post = require('./app/models/post.js');
 
@@ -17,6 +15,9 @@ app.use(express.static('public'));
 /* open a connection to the database */
 mongoose.connect('mongodb://localhost/myapp');
 
+var db = mongoose.connection;
+
+/* check the connection */
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('we\'re connected!');
@@ -47,7 +48,7 @@ app.get('/posts', function(req, res) {
   Post.find(function (err, posts) {
     if (err) return console.error(err);
     console.log(posts);
-    res.render('posts-index', posts);
+    res.render('posts-index', { posts: posts });
   });
 });
 
